@@ -4,7 +4,6 @@ export default class BreadCrumb extends Component {
   render() {
     return (
       <div>
-        {/* BREADCRUMB */}
         <div id="breadcrumb">
           <div className="container">
             <ul className="breadcrumb">
@@ -15,7 +14,6 @@ export default class BreadCrumb extends Component {
             </ul>
           </div>
         </div>
-        {/* /BREADCRUMB */}
       </div>
     );
   }

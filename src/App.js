@@ -1,10 +1,10 @@
 import React from "react";
+import Header from "./template/Header";
+import NavMenu from "./template/NavMenu";
+import BreadCrumb from "./template/BreadCrumb";
+import Content from "./template/Content";
+import Footer from "./template/Footer";
 import "./App.css";
-import Header from "./Component/Header";
-import NavMenu from "./Component/NavMenu";
-import BreadCrumb from "./Component/BreadCrumb";
-import Content from "./Component/Content";
-import Footer from "./Component/Footer";
 
 function App() {
   return (
