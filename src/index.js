@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Switch } from "react-router";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
-import App from './App';
+import Home from "./routes/home";
 
 const router = (
-    <Router>
+    <BrowserRouter>
         <Switch>
-            <Route path="/" component={App} />
+            <Route path="/" component={Home} />
         </Switch>
-    </Router>
+    </BrowserRouter>
 );
 
 
