@@ -6,6 +6,7 @@ import Products from '../../routes/home/products';
 import Promotions from "../../routes/home/promotions";
 import About from "../../routes/home/about";
 import Custom404 from "../404";
+import Product from '../../routes/home/product';
 
 export default class Content extends Component {
 
@@ -18,6 +19,7 @@ export default class Content extends Component {
                     <Route exact path={`/promotions`} component={Promotions} />
                     <Route exact path={`/payment`} component={Payment} />
                     <Route exact path={`/kart`} component={Kart} />
+                    <Route exact path={`/product`} component={Product} />                    
                     <Route exact path={`/products`} component={Products} />
                     <Route exact path={`/`} component={Products} />
                     <Route path={`*`} component={Custom404} />
