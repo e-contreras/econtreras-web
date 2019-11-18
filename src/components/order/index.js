@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
-export default class Kart extends Component {
+export default class Order extends Component {
 
     constructor(props) {
         super(props);
@@ -41,42 +41,44 @@ export default class Kart extends Component {
         }
 
         return (
-            <div>
-                <div className="section">
-                    <div className="container">
-                        <div className="row">            
-                            <div className="order-summary clearfix">
-                                <div className="section-title">
-                                    <h3 className="title">MI CARRITO</h3>
-                                </div>
-                                <table className="shopping-cart-table table">
-                                    <thead>
-                                        <tr>
-                                            <th>Producto</th>
-                                            <th />
-                                            <th className="text-center">Precio</th>
-                                            <th className="text-center">Cantidad</th>
-                                            <th className="text-center">Total</th>
-                                            <th className="text-right" />
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {order}
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th className="empty" colSpan={3} />
-                                            <th>TOTAL</th>
-                                            <th colSpan={2} className="total">{this.sumTotal(productsInKart)}</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                                <div className="pull-right">
-                                    <button className="primary-btn" onClick={this.showPayment.bind(this)}>COMPRAR</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div className="order-summary clearfix">
+                <div className="section-title">
+                    <h3 className="title">Revisión del pedido</h3>
+                </div>
+                <table className="shopping-cart-table table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th />
+                            <th className="text-center">Precio</th>
+                            <th className="text-center">Cantidad</th>
+                            <th className="text-center">Total</th>
+                            <th className="text-right" />
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {order}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th className="empty" colSpan={3} />
+                            <th>SUBTOTAL</th>
+                            <th colSpan={2} className="sub-total">{this.sumTotal(productsInKart)}</th>
+                        </tr>
+                        <tr>
+                            <th className="empty" colSpan={3} />
+                            <th>SHIPING</th>
+                            <td colSpan={2}>Free Shipping</td>
+                        </tr>
+                        <tr>
+                            <th className="empty" colSpan={3} />
+                            <th>TOTAL</th>
+                            <th colSpan={2} className="total">{this.sumTotalPlusShipping(productsInKart)}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div className="pull-right">
+                    <button className="primary-btn">Realizar pedido</button>
                 </div>
             </div>
         );
@@ -91,6 +93,18 @@ export default class Kart extends Component {
         }
         return currency + " " + new Intl.NumberFormat("de-DE").format(sum);
     }
+
+    sumTotalPlusShipping(kart){
+        var sum = 0;
+        var shipping = 0;
+        var currency = "GS";
+        for(var i = 0; i < kart.length; i++){
+            currency = kart[i].currency.symbol;
+            sum = parseInt( (kart[i].price * kart[i].quantity) + sum);
+        }
+        sum = parseInt(sum + shipping);
+        return currency + " " + new Intl.NumberFormat("de-DE").format(sum);        
+    }    
 
     showPrice(product) {
         var currency = product.currency.symbol;
@@ -107,7 +121,6 @@ export default class Kart extends Component {
     }
 
     showPayment() {
-        console.log(this.props);
         this.props.history.push("/payment");
     }
 

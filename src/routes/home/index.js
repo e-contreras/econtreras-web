@@ -7,18 +7,57 @@ import Footer from "../../template/Footer";
 
 export default class Home extends Component {
 
-    render() {
+    constructor(props){
+        super(props);
+        this.state = {
+            kart: [],
+            categories: [],
+            searchField: undefined
+        }
+    }
 
+    componentWillMount(){
+        this.mockKart();        
+    }
+
+    render() {
         return (
             <div>
-                <Header />
+                <Header kart={this.state.kart} history={this.props.history}/>
                 <NavMenu />
                 <BreadCrumb />
-                <Content />
+                <Content kart={this.state.kart}/>
                 <Footer />
             </div>
         );
 
+    }
+
+    mockKart(){
+        var productsInKart = [
+            {
+                name: "Celular iPhone X 256 GB",
+                price: 500,
+                currency: {
+                    type: "USD",
+                    symbol: "$"
+                },
+                image: "./img/main-product01.jpg",
+                quantity: 3
+
+            },
+            {
+                name: "Celular iPhone X 256 GB",
+                price: 500,
+                currency: {
+                    type: "USD",
+                    symbol: "$"
+                },                
+                image: "./img/main-product01.jpg",                
+                quantity: 3
+            }
+        ];
+        this.setState({ kart: productsInKart });
     }
 
 }
