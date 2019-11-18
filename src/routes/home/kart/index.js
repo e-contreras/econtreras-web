@@ -8,7 +8,7 @@ export default class Kart extends Component {
 
     render() {
         var productsInKart = this.props.kart;
-        var order = <div>Carrito vacío</div>;
+        var order = <></>;
         var havingElements = false;
         if (productsInKart != undefined && productsInKart.length > 0) {
             havingElements = true;

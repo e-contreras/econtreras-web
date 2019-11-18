@@ -27,11 +27,7 @@ export default class ProductCard extends Component {
             <div className="col-md-4 col-sm-6 col-xs-6">
                 <div className="product product-single">
                     <div className="product-thumb">
-                        <div className="product-label" hidden={!(product.new || product.haveDiscount)} >
-                            <span>Nuevo</span>
-                            <span className="sale">{product.discount}</span>
-                        </div>
-                        <button className="main-btn quick-view"><i className="fa fa-search-plus" />VER</button>
+                        <button className="main-btn quick-view" onClick={(e)=>{this.getDetail(product)}}><i className="fa fa-search-plus" />VER</button>
                         <img src={product.image} alt={product.name} />
                     </div>
                     <div className="product-body">
@@ -67,6 +63,11 @@ export default class ProductCard extends Component {
             image: product.image
         }
         this.props.addToKart(kartItem);
+    }
+
+    getDetail(product){
+        this.props.selectProduct(product);
+        this.props.history.push("/product");
     }
 
 }

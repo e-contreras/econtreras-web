@@ -7,6 +7,16 @@ export default class Payment extends Component {
         console.log(this.props);
         return (
             <div>
+                <div id="breadcrumb">
+                    <div className="container">
+                        <ul className="breadcrumb">
+                            <li>
+                                <a href="#">Home</a>
+                            </li>
+                            <li className="active">Productos</li>
+                        </ul>
+                    </div>
+                </div>                
                 <div className="section">
                     <div className="container">
                         <div className="row">
