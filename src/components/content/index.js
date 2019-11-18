@@ -15,7 +15,6 @@ export default class Content extends Component {
     }
 
     render() {
-
         return (
             <div style={{ textAlign: "center", width: "100%" }}>
                 <Switch>
@@ -23,9 +22,9 @@ export default class Content extends Component {
                     <Route exact path={`/promotions`} component={Promotions} />
                     <Route exact path={`/payment`} render={routeProps => <Payment {...routeProps} kart={this.props.kart}/>} />
                     <Route exact path={`/kart`} render={routeProps => <Kart {...routeProps} kart={this.props.kart}/>} />
+                    <Route exact path={`/products`} render={routeProps => <Products {...routeProps} kart={this.props.kart} addToKart={this.props.addToKart} removeFromKart={this.props.removeFromKart}/> } />
                     <Route exact path={`/product`} component={Product} />
-                    <Route exact path={`/products`} component={Products} />
-                    <Route exact path={`/`} component={Products} />
+                    <Route exact path={`/`} render={routeProps => <Products {...routeProps} kart={this.props.kart} addToKart={this.props.addToKart} removeFromKart={this.props.removeFromKart} /> } />
                     <Route path={`*`} component={Custom404} />
                 </Switch>
             </div>

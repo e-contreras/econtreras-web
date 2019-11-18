@@ -105,7 +105,7 @@ export default class Header extends Component {
                                             <br />
                                             <span>{this.sumProductsInKart()}</span>
                                         </a>
-                                        <KartList kart={this.props.kart} history={this.props.history}/>
+                                        <KartList kart={this.props.kart} history={this.props.history} removeFromKart={this.props.removeFromKart}/>
                                     </li>
                                     <li className="nav-toggle">
                                         <button className="nav-toggle-btn main-btn icon-btn">

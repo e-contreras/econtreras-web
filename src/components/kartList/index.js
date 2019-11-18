@@ -25,7 +25,7 @@ export default class KartList extends Component {
                             <a href="#">{i.name}</a>
                         </h2>
                     </div>
-                    <button className="cancel-btn">
+                    <button className="cancel-btn" onClick={(e)=>{this.props.removeFromKart(i)}}>
                         <i className="fa fa-trash" />
                     </button>
                 </div>
