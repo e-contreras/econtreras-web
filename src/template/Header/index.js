@@ -14,18 +14,16 @@ export default class Header extends Component {
                     <div id="top-header">
                         <div className="container">
                             <div className="pull-left">
-                                <span>Bienvenido a E-Contreras!</span>
+                                <span><strong>Bienvenido a E-Contreras!</strong></span>
                             </div>
                             <div className="pull-right">
                                 <ul className="header-top-links">
+                                    <li><a href="#"><strong>Admin</strong></a></li>
                                     <li>
-                                        <a href="#">Admin</a>
+                                        <a href="#"><strong>Nosotros</strong></a>
                                     </li>
                                     <li>
-                                        <a href="#">Nosotros</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">FAQ</a>
+                                        <a href="#"><strong>FAQ</strong></a>
                                     </li>
                                 </ul>
                             </div>
