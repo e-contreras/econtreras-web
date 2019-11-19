@@ -38,24 +38,24 @@ export default class PayMethod extends Component {
                                                     <table style={{ width: "100%" }}>
                                                         <tbody>
                                                             <tr>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <label>Cuenta a debitar</label>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <label>Cuenta a acreditar</label>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <label>Entidad financiera</label>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <input style={{ border: "1px solid silver", padding: "5px", width: "95%" }} type="text" placeholder="Número de cuenta" />
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <input style={{ border: "1px solid silver", padding: "5px", width: "95%" }} type="text" placeholder="Número de cuenta"/>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <input style={{ border: "1px solid silver", padding: "5px", width: "95%" }} type="text" placeholder="Seleccione la entidad financiera"/>
                                                                 </td>
                                                             </tr>
@@ -65,24 +65,24 @@ export default class PayMethod extends Component {
                                                                 <td>&nbsp;</td>                                                                                                                                
                                                             </tr>
                                                             <tr>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <label>Moneda</label>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <label>Tipo de documento</label>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <label>Número de documento</label>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <input style={{ border: "1px solid silver", padding: "5px", width: "95%" }} type="text" placeholder="Seleccione la moneda"/>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <input style={{ border: "1px solid silver", padding: "5px", width: "95%" }} type="text" placeholder="Seleccione el tipo de documento"/>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <input style={{ border: "1px solid silver", padding: "5px", width: "95%" }} type="text" placeholder="Número de documento"/>
                                                                 </td>
                                                             </tr>
@@ -99,27 +99,27 @@ export default class PayMethod extends Component {
                                                     <table style={{ width: "100%" }}>
                                                         <tbody>
                                                             <tr>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <label>Número de tarjeta de crédito</label>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <label>Nombre en la tarjeta de crédito</label>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <label>Fecha de expiración</label>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>
-                                                                    <input style={{ border: "1px solid silver", padding: "5px", width: "50px" }} placeholder="0000"/>
-                                                                    <input style={{ border: "1px solid silver", padding: "5px", width: "50px" }} placeholder="0000"/>
-                                                                    <input style={{ border: "1px solid silver", padding: "5px", width: "50px" }} placeholder="0000"/>
-                                                                    <input style={{ border: "1px solid silver", padding: "5px", width: "50px" }} placeholder="0000"/>
+                                                                <td style={{width: "33%"}}>
+                                                                    <input style={{ border: "1px solid silver", padding: "5px", width: "22%" }} placeholder="0000"/>
+                                                                    <input style={{ border: "1px solid silver", padding: "5px", width: "22%" }} placeholder="0000"/>
+                                                                    <input style={{ border: "1px solid silver", padding: "5px", width: "22%" }} placeholder="0000"/>
+                                                                    <input style={{ border: "1px solid silver", padding: "5px", width: "22%" }} placeholder="0000"/>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <input style={{ border: "1px solid silver", padding: "5px", width: "95%" }} type="text" placeholder="Nombre del propietario"/>
                                                                 </td>
-                                                                <td>
+                                                                <td style={{width: "33%"}}>
                                                                     <input style={{ border: "1px solid silver", padding: "5px", width: "40%", textAlign: "right" }} type="number" maxLength="4" max="12" defaultValue="1" />
                                                                     <span> / </span>
                                                                     <input style={{ border: "1px solid silver", padding: "5px", width: "40%" }} type="number" maxLength="4" defaultValue="2019" />
