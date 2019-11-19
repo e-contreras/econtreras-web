@@ -2,6 +2,13 @@ import React, { Component } from "react";
 
 export default class Product extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            quantity: 1
+        };
+    }
+
     render() {
         var product = this.props.product;
         if(product == undefined || product == null){ return (
@@ -80,9 +87,11 @@ export default class Product extends Component {
                                         <div className="product-btns">
                                             <div className="qty-input">
                                                 <span className="text-uppercase">Cantidad: </span>
-                                                <input className="input" type="number" />
+                                                <input value={this.state.quantity} onChange={(e)=>{this.changeField(e, "quantity")}} className="input" type="number" />
                                             </div>
-                                            <button className="primary-btn add-to-cart"><i className="fa fa-shopping-cart" /> Añadir</button>
+                                            <button className="primary-btn add-to-cart" onClick={(e)=>{this.handleAddToKart(product)}}>
+                                                <i className="fa fa-shopping-cart" /> Añadir
+                                            </button>
                                             <div className="pull-right">
                                                 <button className="main-btn icon-btn"><i className="fa fa-heart" /></button>
                                                 <button className="main-btn icon-btn"><i className="fa fa-exchange" /></button>
@@ -114,6 +123,27 @@ export default class Product extends Component {
             </div>
         );
     }
+
+    changeField(e, field) {
+        var obj = {};
+        obj[field] = e.target.value;
+        this.setState(obj);
+    }    
+    
+    handleAddToKart(product){
+        var kartItem = {
+            id: product.id,
+            name: product.name,
+            currency: product.currency,
+            price: product.price,
+            haveDiscount: product.haveDiscount,
+            discount: product.discount,
+            quantity: this.state.quantity,
+            stock: product.stock,
+            image: product.image
+        }
+        this.props.addToKart(kartItem);
+    }    
 
     showPrice(product) {
         var currency = product.currency.symbol;

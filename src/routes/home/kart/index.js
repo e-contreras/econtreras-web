@@ -26,13 +26,13 @@ export default class Kart extends Component {
                         <strong>{this.showPrice(i)}</strong><br />
                     </td>
                     <td className="qty text-center">
-                        <input className="input" type="number" defaultValue={i.quantity} />
+                        <input className="input" type="number" defaultValue={i.quantity} onChange={(e)=>{this.changeQuantity(i, e)}}/>
                     </td>
                     <td className="total text-center">
                         <strong className="primary-color">{this.showSum(i)}</strong>
                     </td>
                     <td className="text-right">
-                        <button className="main-btn icon-btn">
+                        <button className="main-btn icon-btn" onClick={(e)=>{this.props.removeFromKart(i)}}>
                             <i className="fa fa-close" />
                         </button>
                     </td>
@@ -109,6 +109,11 @@ export default class Kart extends Component {
     showPayment() {
         console.log(this.props);
         this.props.history.push("/payment");
+    }
+
+    changeQuantity(product, e){
+        product.quantity = e.target.value;
+        this.props.addToKart(product);
     }
 
 }

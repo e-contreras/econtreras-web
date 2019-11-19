@@ -8,7 +8,7 @@ export default class Order extends Component {
 
     render() {
         var productsInKart = this.props.kart;
-        var order = <div>Carrito vacío</div>;
+        var order = <></>;
         var havingElements = false;
         if (productsInKart != undefined && productsInKart.length > 0) {
             havingElements = true;
@@ -26,13 +26,13 @@ export default class Order extends Component {
                         <strong>{this.showPrice(i)}</strong><br />
                     </td>
                     <td className="qty text-center">
-                        <input className="input" type="number" defaultValue={i.quantity} />
+                        <input className="input" type="number" defaultValue={i.quantity} onChange={(e)=>{this.changeQuantity(i, e)}}/>
                     </td>
                     <td className="total text-center">
                         <strong className="primary-color">{this.showSum(i)}</strong>
                     </td>
                     <td className="text-right">
-                        <button className="main-btn icon-btn">
+                        <button className="main-btn icon-btn" onClick={(e)=>{this.props.removeFromKart(i)}}>
                             <i className="fa fa-close" />
                         </button>
                     </td>
@@ -67,11 +67,6 @@ export default class Order extends Component {
                         </tr>
                         <tr>
                             <th className="empty" colSpan={3} />
-                            <th>SHIPING</th>
-                            <td colSpan={2}>Free Shipping</td>
-                        </tr>
-                        <tr>
-                            <th className="empty" colSpan={3} />
                             <th>TOTAL</th>
                             <th colSpan={2} className="total">{this.sumTotalPlusShipping(productsInKart)}</th>
                         </tr>
@@ -83,6 +78,11 @@ export default class Order extends Component {
             </div>
         );
     }
+
+    changeQuantity(product, e){
+        product.quantity = e.target.value;
+        this.props.addToKart(product);
+    }    
 
     sumTotal(kart){
         var sum = 0;

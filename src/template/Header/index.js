@@ -8,6 +8,15 @@ export default class Header extends Component {
     }
 
     render() {
+
+        var categories = this.props.categories;
+        var categoriesShow = <option key="-1" value="-1">No hay categorías</option>;
+        if(categories != undefined && categories.length > 0){
+            categoriesShow = categories.map( (i) => (
+                <option value={i.id} key={i.id}>{i.name}</option>
+            ));
+        }
+
         return (
             <div>
                 <header>
@@ -43,8 +52,7 @@ export default class Header extends Component {
                                         <input className="input search-input" type="text" placeholder="Estoy buscando..." />
                                         <select className="input search-categories">
                                             <option value={0}>Todas las categorías</option>
-                                            <option value={1}>Category 01</option>
-                                            <option value={1}>Category 02</option>
+                                            {categoriesShow}
                                         </select>
                                         <button className="search-btn">
                                             <i className="fa fa-search" />

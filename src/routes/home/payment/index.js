@@ -9,18 +9,21 @@ export default class Payment extends Component {
             <div>
                 <div id="breadcrumb">
                     <div className="container">
-                        <ul className="breadcrumb">
+                        <ul className="breadcrumb" style={{textAlign: "left"}}>
                             <li>
-                                <a href="#">Home</a>
+                                <a href="#" onClick={this.goToHome.bind(this)}>Inicio</a>
                             </li>
-                            <li className="active">Productos</li>
+                            <li>
+                                <a href="#" onClick={this.goToProducts.bind(this)} >Productos</a>
+                            </li>
+                            <li className="active">Pagos</li>
                         </ul>
                     </div>
-                </div>                
+                </div>               
                 <div className="section">
                     <div className="container">
                         <div className="row">
-                            <form id="checkout-form" className="clearfix">
+
                                 <div className="col-md-6">
                                     <div className="billing-details">
                                         <p>Ya eres un cliente ? <a href="#">Inicie sesión</a></p>
@@ -63,29 +66,6 @@ export default class Payment extends Component {
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <div className="shiping-methods">
-                                        <div className="section-title">
-                                            <h4 className="title">Métodos de envío</h4>
-                                        </div>
-                                        <div className="input-checkbox">
-                                            <input type="radio" name="shipping" id="shipping-1" defaultChecked />
-                                            <label htmlFor="shipping-1">Envío gratis -  $0.00</label>
-                                            <div className="caption">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                                </p><p>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="input-checkbox">
-                                            <input type="radio" name="shipping" id="shipping-2" />
-                                            <label htmlFor="shipping-2">Estándar - $4.00</label>
-                                            <div className="caption">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                                </p><p>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div className="payments-methods">
                                         <div className="section-title">
                                             <h4 className="title">Formas de pago</h4>
@@ -108,26 +88,25 @@ export default class Payment extends Component {
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className="input-checkbox">
-                                            <input type="radio" name="payments" id="payments-3" />
-                                            <label htmlFor="payments-3">Paypal</label>
-                                            <div className="caption">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                                    </p><p>
-                                                </p>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div className="col-md-12">
-                                    <Order paymentMethod={undefined} shippingType={undefined} kart={this.props.kart}/>
+                                    <Order removeFromKart={this.props.removeFromKart} addToKart={this.props.addToKart} paymentMethod={undefined} shippingType={undefined} kart={this.props.kart}/>
                                 </div>
-                            </form>
+
                         </div>
                     </div>
                 </div>
             </div>
         );
     }
+
+    goToProducts(){
+        this.props.history.push("/products");
+    }
+
+    goToHome(){
+        this.props.history.push("/");
+    }    
 
 }

@@ -21,8 +21,8 @@ export default class Content extends Component {
                 <Switch>
                     <Route exact path={`/about`} component={About}  />
                     <Route exact path={`/promotions`} component={Promotions} />
-                    <Route exact path={`/payment`} render={routeProps => <Payment {...routeProps} kart={this.props.kart}/>} />
-                    <Route exact path={`/kart`} render={routeProps => <Kart {...routeProps} kart={this.props.kart}/>} />
+                    <Route exact path={`/payment`} render={routeProps => <Payment {...routeProps} kart={this.props.kart} addToKart={this.props.addToKart} removeFromKart={this.props.removeFromKart}/>} />
+                    <Route exact path={`/kart`} render={routeProps => <Kart {...routeProps} kart={this.props.kart} addToKart={this.props.addToKart} removeFromKart={this.props.removeFromKart} />} />
                     <Route exact path={`/products`} render={routeProps => <Products {...routeProps} kart={this.props.kart} addToKart={this.props.addToKart} removeFromKart={this.props.removeFromKart} selectProduct={this.props.selectProduct} /> }/>
                     <Route exact path={`/product`} render={routeProps => <Product {...routeProps} kart={this.props.kart} addToKart={this.props.addToKart} removeFromKart={this.props.removeFromKart} product={this.props.product} /> } />
                     <Route exact path={`/`} render={routeProps => <Start {...routeProps} /> } />

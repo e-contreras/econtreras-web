@@ -8,7 +8,7 @@ export default class Start extends Component {
             <div>
                 <div id="home">
                     <div className="container">
-                        <div className="home-wrap">
+                        <div className="home-wrap" style={{marginLeft: "0px"}}>
                             <div id="home-slick">
                                 <div className="banner banner-1">
                                     <img src="./img/banner01.jpg" alt />
