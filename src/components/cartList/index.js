@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 
-export default class KartList extends Component {
+export default class CartList extends Component {
 
     constructor(props){
         super(props);
     }
 
     render() {
-        var productsInKart = this.props.kart;
+        var productsInCart = this.props.cart;
         var productsShow = <div>Carrito vacío</div>;
         var havingElements = false;
-        if(productsInKart != undefined && productsInKart.length > 0 ){
+        if(productsInCart != undefined && productsInCart.length > 0 ){
             havingElements = true;
-            productsShow = productsInKart.map((i)=>(
+            productsShow = productsInCart.map((i)=>(
                 <div className="product product-widget">
                     <div className="product-thumb">
                         <img src={"data:image/jpeg;base64," + i.images[0]} alt />
@@ -25,7 +25,7 @@ export default class KartList extends Component {
                             <a href="#">{i.product_name}</a>
                         </h2>
                     </div>
-                    <button className="cancel-btn" onClick={(e)=>{this.props.removeFromKart(i)}}>
+                    <button className="cancel-btn" onClick={(e)=>{this.props.removeFromCart(i)}}>
                         <i className="fa fa-trash" />
                     </button>
                 </div>
@@ -38,7 +38,7 @@ export default class KartList extends Component {
                         {productsShow}
                     </div>
                     <div className="shopping-cart-btns" hidden={!havingElements}>
-                        <button className="main-btn" onClick={this.showFullKartView.bind(this)}>Ver carrito</button>
+                        <button className="main-btn" onClick={this.showFullCartView.bind(this)}>Ver carrito</button>
                         <button className="primary-btn" onClick={this.showPayment.bind(this)} >COMPRAR <i className="fa fa-arrow-circle-right" />
                         </button>
                     </div>
@@ -52,8 +52,8 @@ export default class KartList extends Component {
         return currency + " " + new Intl.NumberFormat("de-DE").format(product.sale_prices);
     }    
 
-    showFullKartView(){
-        this.props.history.push("/kart");
+    showFullCartView(){
+        this.props.history.push("/cart");
     }
 
     showPayment(){

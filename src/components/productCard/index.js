@@ -37,7 +37,7 @@ export default class ProductCard extends Component {
                         <div className="product-btns">
                             <button className="main-btn icon-btn"><i className="fa fa-heart" /></button>
                             <button className="main-btn icon-btn"><i className="fa fa-exchange" /></button>
-                            <button className="primary-btn add-to-cart" onClick={(e)=>{this.handleAddToKart(product)}}><i className="fa fa-shopping-cart" /> Añadir</button>
+                            <button className="primary-btn add-to-cart" onClick={(e)=>{this.handleAddToCart(product)}}><i className="fa fa-shopping-cart" /> Añadir</button>
                         </div>
                     </div>
                 </div>
@@ -50,8 +50,8 @@ export default class ProductCard extends Component {
         return currency + " " + new Intl.NumberFormat("de-DE").format(product.sale_prices);
     }
 
-    handleAddToKart(product){
-        var kartItem = {
+    handleAddToCart(product){
+        var cartItem = {
             available: product.available,
             description: product.description,
             id: product.id,
@@ -61,7 +61,7 @@ export default class ProductCard extends Component {
             sale_prices: product.sale_prices,
             quantity: 1
         }
-        this.props.addToKart(kartItem);
+        this.props.addToCart(cartItem);
     }
 
     getDetail(product){

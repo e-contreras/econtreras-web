@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import KartList from "../../components/kartList";
+import CartList from "../../components/cartList";
 
 export default class Header extends Component {
 
@@ -13,7 +13,7 @@ export default class Header extends Component {
         var categoriesShow = <option key="-1" value="-1">No hay categorías</option>;
         if(categories != undefined && categories.length > 0){
             categoriesShow = categories.map( (i) => (
-                <option value={i.id} key={i.id}>{i.name}</option>
+                <option value={i.id} key={i.id}>{i.description}</option>
             ));
         }
 
@@ -105,13 +105,13 @@ export default class Header extends Component {
                                         <a className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                             <div className="header-btns-icon">
                                                 <i className="fa fa-shopping-cart" />
-                                                <span className="qty">{this.quantityProductsInKart()}</span>
+                                                <span className="qty">{this.quantityProductsInCart()}</span>
                                             </div>
                                             <strong className="text-uppercase">MI CARRITO</strong>
                                             <br />
-                                            <span>{this.sumProductsInKart()}</span>
+                                            <span>{this.sumProductsInCart()}</span>
                                         </a>
-                                        <KartList kart={this.props.kart} history={this.props.history} removeFromKart={this.props.removeFromKart}/>
+                                        <CartList cart={this.props.cart} history={this.props.history} removeFromCart={this.props.removeFromCart}/>
                                     </li>
                                     <li className="nav-toggle">
                                         <button className="nav-toggle-btn main-btn icon-btn">
@@ -127,18 +127,18 @@ export default class Header extends Component {
         );
     }
 
-    quantityProductsInKart(){
-        var kart = this.props.kart;
-        return kart.length;
+    quantityProductsInCart(){
+        var cart = this.props.cart;
+        return cart.length;
     }
 
-    sumProductsInKart(){
-        var kart = this.props.kart;
+    sumProductsInCart(){
+        var cart = this.props.cart;
         var sum = 0;
         var currency = "GS";
-        for(var i = 0; i < kart.length; i++){
+        for(var i = 0; i < cart.length; i++){
             currency = "GS";
-            sum = parseInt( (kart[i].sale_prices * kart[i].quantity) + sum);
+            sum = parseInt( (cart[i].sale_prices * cart[i].quantity) + sum);
         }
         return currency + " " + new Intl.NumberFormat("de-DE").format(sum);
     }

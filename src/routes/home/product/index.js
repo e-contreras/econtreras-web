@@ -89,7 +89,7 @@ export default class Product extends Component {
                                                 <span className="text-uppercase">Cantidad: </span>
                                                 <input value={this.state.quantity} onChange={(e)=>{this.changeField(e, "quantity")}} className="input" type="number" />
                                             </div>
-                                            <button className="primary-btn add-to-cart" onClick={(e)=>{this.handleAddToKart(product)}}>
+                                            <button className="primary-btn add-to-cart" onClick={(e)=>{this.handleAddToCart(product)}}>
                                                 <i className="fa fa-shopping-cart" /> Añadir
                                             </button>
                                             <div className="pull-right">
@@ -130,8 +130,8 @@ export default class Product extends Component {
         this.setState(obj);
     }    
     
-    handleAddToKart(product){
-        var kartItem = {
+    handleAddToCart(product){
+        var cartItem = {
             available: product.available,
             description: product.description,
             id: product.id,
@@ -141,7 +141,7 @@ export default class Product extends Component {
             sale_prices: product.sale_prices,
             quantity: this.state.quantity
         }
-        this.props.addToKart(kartItem);
+        this.props.addToCart(cartItem);
     }    
 
     showPrice(product) {

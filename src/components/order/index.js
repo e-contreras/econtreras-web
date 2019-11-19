@@ -7,12 +7,12 @@ export default class Order extends Component {
     }
 
     render() {
-        var productsInKart = this.props.kart;
+        var productsInCart = this.props.cart;
         var order = <></>;
         var havingElements = false;
-        if (productsInKart != undefined && productsInKart.length > 0) {
+        if (productsInCart != undefined && productsInCart.length > 0) {
             havingElements = true;
-            order = productsInKart.map((i) => (
+            order = productsInCart.map((i) => (
                 <tr>
                     <td className="thumb">
                         <img src={"data:image/jpeg;base64," + i.images[0]} alt={i.product_name} />
@@ -34,7 +34,7 @@ export default class Order extends Component {
                         <strong className="primary-color">{this.showSum(i)}</strong>
                     </td>
                     <td className="text-right">
-                        <button className="main-btn icon-btn" onClick={(e)=>{this.props.removeFromKart(i)}}>
+                        <button className="main-btn icon-btn" onClick={(e)=>{this.props.removeFromCart(i)}}>
                             <i className="fa fa-close" />
                         </button>
                     </td>
@@ -65,17 +65,17 @@ export default class Order extends Component {
                         <tr>
                             <th className="empty" colSpan={3} />
                             <th>SUBTOTAL</th>
-                            <th colSpan={2} className="sub-total">{this.sumTotal(productsInKart)}</th>
+                            <th colSpan={2} className="sub-total">{this.sumTotal(productsInCart)}</th>
                         </tr>
                         <tr>
                             <th className="empty" colSpan={3} />
                             <th>TOTAL</th>
-                            <th colSpan={2} className="total">{this.sumTotalPlusShipping(productsInKart)}</th>
+                            <th colSpan={2} className="total">{this.sumTotalPlusShipping(productsInCart)}</th>
                         </tr>
                     </tfoot>
                 </table>
                 <div className="pull-right">
-                    <button className="primary-btn">Realizar pedido</button>
+                    <button className="primary-btn" onClick={this.goToPayMethod.bind(this)}>Realizar pedido</button>
                 </div>
             </div>
         );
@@ -83,26 +83,26 @@ export default class Order extends Component {
 
     changeQuantity(product, e){
         product.quantity = e.target.value;
-        this.props.addToKart(product);
+        this.props.addToCart(product);
     }    
 
-    sumTotal(kart){
+    sumTotal(cart){
         var sum = 0;
         var currency = "GS";
-        for(var i = 0; i < kart.length; i++){
+        for(var i = 0; i < cart.length; i++){
             currency = "GS";
-            sum = parseInt( (kart[i].sale_prices * kart[i].quantity) + sum);
+            sum = parseInt( (cart[i].sale_prices * cart[i].quantity) + sum);
         }
         return currency + " " + new Intl.NumberFormat("de-DE").format(sum);
     }
 
-    sumTotalPlusShipping(kart){
+    sumTotalPlusShipping(cart){
         var sum = 0;
         var shipping = 0;
         var currency = "GS";
-        for(var i = 0; i < kart.length; i++){
+        for(var i = 0; i < cart.length; i++){
             currency = "GS";
-            sum = parseInt( (kart[i].sale_prices * kart[i].quantity) + sum);
+            sum = parseInt( (cart[i].sale_prices * cart[i].quantity) + sum);
         }
         sum = parseInt(sum + shipping);
         return currency + " " + new Intl.NumberFormat("de-DE").format(sum);        
@@ -118,12 +118,16 @@ export default class Order extends Component {
         return currency + " " + new Intl.NumberFormat("de-DE").format(product.sale_prices * product.quantity);        
     }
 
-    showFullKartView() {
-        this.props.history.push("/kart");
+    showFullCartView() {
+        this.props.history.push("/cart");
     }
 
     showPayment() {
         this.props.history.push("/payment");
+    }
+
+    goToPayMethod(){
+        this.props.history.push("/paymethod");
     }
 
 }

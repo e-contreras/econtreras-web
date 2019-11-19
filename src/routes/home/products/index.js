@@ -25,7 +25,7 @@ export default class Products extends Component {
         if(products != undefined && products.length > 0){
             havingProducts = true;
             productsShow = products.map((i)=>(
-                <ProductCard product={i} history={this.props.history} selectProduct={this.props.selectProduct} addToKart={this.props.addToKart} removeFromKart={this.props.removeFromKart}/>
+                <ProductCard product={i} history={this.props.history} selectProduct={this.props.selectProduct} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart}/>
             ));
         }
 

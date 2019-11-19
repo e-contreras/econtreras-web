@@ -6,13 +6,14 @@ import Footer from "../../template/Footer";
 import Login from "./login";
 import Register from "./register";
 import ls from "local-storage";
+import axios from "axios";
 
 export default class Home extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-            kart: [],
+            cart: [],
             categories: [],
             searchField: undefined,
             productSelected: undefined,
@@ -22,7 +23,7 @@ export default class Home extends Component {
     }
 
     componentWillMount(){
-        this.loadKartFromLS();
+        this.loadCartFromLS();
         this.getCategories();
     }
 
@@ -31,11 +32,11 @@ export default class Home extends Component {
             <div>
                 <Login show={this.state.showLogin} close={this.closeLogin.bind(this)} showRegister={this.showRegisterPage.bind(this)}/>
                 <Register show={this.state.showRegister} showLogin={this.showLoginPage.bind(this)} close={this.closeRegister.bind(this)}/>
-                <Header showLogin={this.showLoginPage.bind(this)} showRegister={this.showRegisterPage.bind(this)} categories={this.state.categories} kart={this.state.kart} history={this.props.history} removeFromKart={this.removeFromKart.bind(this)}/>
+                <Header showLogin={this.showLoginPage.bind(this)} showRegister={this.showRegisterPage.bind(this)} categories={this.state.categories} cart={this.state.cart} history={this.props.history} removeFromCart={this.removeFromCart.bind(this)}/>
                 <NavMenu history={this.props.history} location={this.props.location}/>
                 <Content
-                    kart={this.state.kart} addToKart={this.addToKart.bind(this)}
-                    removeFromKart={this.removeFromKart.bind(this)}
+                    cart={this.state.cart} addToCart={this.addToCart.bind(this)}
+                    removeFromCart={this.removeFromCart.bind(this)}
                     product={this.state.productSelected} selectProduct={this.selectProduct.bind(this)}
                 />
                 <Footer />
@@ -44,65 +45,54 @@ export default class Home extends Component {
 
     }
    
-    addToKart(product){
-        var kart = this.state.kart;
-        if(kart.length > 0){
-            for(var i = 0; i < kart.length; i++){
-                if(product.id == kart[i].id){
-                    kart[i].quantity = product.quantity;
-                    ls.set("e-contreras-kart", JSON.stringify(kart));                    
-                    this.setState({ kart: kart });
+    addToCart(product){
+        var cart = this.state.cart;
+        if(cart.length > 0){
+            for(var i = 0; i < cart.length; i++){
+                if(product.id == cart[i].id){
+                    cart[i].quantity = product.quantity;
+                    ls.set("e-contreras-cart", JSON.stringify(cart));                    
+                    this.setState({ cart: cart });
                     return;
                 }
             }
         }
-        kart.push(product);
-        ls.set("e-contreras-kart", JSON.stringify(kart));        
-        this.setState({kart: kart});
+        cart.push(product);
+        ls.set("e-contreras-cart", JSON.stringify(cart));        
+        this.setState({cart: cart});
     }
 
-    removeFromKart(product){
-        var kart = this.state.kart;
-        kart = kart.filter(item => item !== product);
-        ls.set("e-contreras-kart", JSON.stringify(kart));
-        this.setState({kart: kart});
+    removeFromCart(product){
+        var cart = this.state.cart;
+        cart = cart.filter(item => item !== product);
+        ls.set("e-contreras-cart", JSON.stringify(cart));
+        this.setState({cart: cart});
     }
 
     selectProduct(product){
         this.setState({ productSelected: product });
     }
 
-    loadKartFromLS(){
-        var kart = this.state.kart;
-        if(kart == undefined || kart.length == 0){
+    loadCartFromLS(){
+        var cart = this.state.cart;
+        if(cart == undefined || cart.length == 0){
             // obtener del Local Storage
-            var kartLS = ls.get("e-contreras-kart");
-            if(kartLS != null && kartLS != undefined && kartLS){
-                this.setState({ kart: JSON.parse(kartLS) });
+            var cartLS = ls.get("e-contreras-cart");
+            if(cartLS != null && cartLS != undefined && cartLS){
+                this.setState({ cart: JSON.parse(cartLS) });
             }
         }
     }
 
     getCategories(){
-        var categorias = [
-            {
-                id: 1,
-                name: "Celulares"
-            },
-            {
-                id: 2,
-                name: "Prendas de vestir"
-            },
-            {
-                id: 3,
-                name: "Mochilas"
-            },
-            {
-                id: 4,
-                name: "Bolsos"
-            }
-        ];
-        this.setState({categories: categorias});
+        axios.get("http://localhost:8080/categories")
+        .then(res => {
+            console.log(res);
+            this.setState({ categories: res.data });
+        })
+        .catch(error => {
+            console.error(error);
+        });
     }
 
     showLoginPage(){ this.setState({ showRegister: false, showLogin: true }); }
