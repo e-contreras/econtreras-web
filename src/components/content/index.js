@@ -23,7 +23,7 @@ export default class Content extends Component {
                     <Route exact path={`/about`} component={About}  />
                     <Route exact path={`/promotions`} component={Promotions} />
                     <Route exact path={`/payment`} render={routeProps => <Payment {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart}/>} />
-                    <Route exact path={`/paymethod`} render={routeProps => <PayMethod {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart}/>} />                    
+                    <Route exact path={`/paymethod`} render={routeProps => <PayMethod {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart}/>} />
                     <Route exact path={`/cart`} render={routeProps => <Cart {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart} />} />
                     <Route exact path={`/products`} render={routeProps => <Products {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart} selectProduct={this.props.selectProduct} /> }/>
                     <Route exact path={`/product`} render={routeProps => <Product {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart} product={this.props.product} /> } />

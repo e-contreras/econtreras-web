@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import Order from "../../../components/order";
+import axios from "axios";
+import Notifications, {notify} from 'react-notify-toast';
 
 export default class PayMethod extends Component {
 
@@ -7,6 +8,7 @@ export default class PayMethod extends Component {
         console.log(this.props);
         return (
             <div>
+                <Notifications/>
                 <div id="breadcrumb">
                     <div className="container">
                         <ul className="breadcrumb" style={{ textAlign: "left" }}>
@@ -132,7 +134,7 @@ export default class PayMethod extends Component {
                                         </div>
                                     </div>
                                     <div className="pull-right">
-                                        <button className="primary-btn">CONFIRMAR</button>
+                                        <button className="primary-btn" onClick={this.confirmPurchase.bind(this)}>CONFIRMAR</button>
                                     </div>
                                 </div>
                             </div>
@@ -141,6 +143,42 @@ export default class PayMethod extends Component {
                 </div>
             </div>
         );
+    }
+
+    convert(cart){
+        var newCart = [];
+        if(cart != undefined && cart.length > 0){
+            for(var i = 0; i < cart.length; i++){
+                var n = {
+                    cartId: cart[i].id,
+                    price: cart[i].sale_prices,
+                    productId: cart[i].id,
+                    purchasePrice: cart[i].sale_prices,
+                    quantity: parseInt(cart[i].quantity)
+                };
+                newCart.push(n);
+            }
+        }
+        return newCart;
+    }
+
+    confirmPurchase(){
+        var cart = this.props.cart;
+        cart = this.convert(cart);
+        var obj = {
+            cartProductBeanList: cart,
+            status: "CONFIRMADO",
+            solicitudeId: Math.floor(Math.random() * 10000000)
+        };
+        console.log(obj);
+        axios.post("http://localhost:8080/carts", obj)
+        .then(res => {
+            notify.show("Se ha realizado el pedido correctamente", "success");
+        })
+        .catch(error => {
+            notify.show("Ha ocurrido un error al procesar el pedido", "error");
+            console.error(error);
+        })
     }
 
     goToProducts() { this.props.history.push("/products"); }
