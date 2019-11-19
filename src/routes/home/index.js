@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import Header from "../../template/Header";
 import NavMenu from "../../template/NavMenu";
-import BreadCrumb from "../../template/BreadCrumb";
 import Content from "../../components/content";
 import Footer from "../../template/Footer";
+import Login from "./login";
+import Register from "./register";
+import ls from "local-storage";
 
 export default class Home extends Component {
 
@@ -13,18 +15,24 @@ export default class Home extends Component {
             kart: [],
             categories: [],
             searchField: undefined,
-            productSelected: undefined
+            productSelected: undefined,
+            showLogin: false,
+            showRegister: false
         }
     }
 
     componentWillMount(){
+        this.loadKartFromLS();
         this.getCategories();
     }
 
     render() {
+        
         return (
             <div>
-                <Header categories={this.state.categories} kart={this.state.kart} history={this.props.history} removeFromKart={this.removeFromKart.bind(this)}/>
+                <Login show={this.state.showLogin} close={this.closeLogin.bind(this)} showRegister={this.showRegisterPage.bind(this)}/>
+                <Register show={this.state.showRegister} showLogin={this.showLoginPage.bind(this)} close={this.closeRegister.bind(this)}/>
+                <Header showLogin={this.showLoginPage.bind(this)} categories={this.state.categories} kart={this.state.kart} history={this.props.history} removeFromKart={this.removeFromKart.bind(this)}/>
                 <NavMenu history={this.props.history}/>
                 <Content
                     kart={this.state.kart} addToKart={this.addToKart.bind(this)}
@@ -49,17 +57,30 @@ export default class Home extends Component {
             }
         }
         kart.push(product);
+        ls.set("e-contreras-kart", JSON.stringify(kart));        
         this.setState({kart: kart});
     }
 
     removeFromKart(product){
         var kart = this.state.kart;
         kart = kart.filter(item => item !== product);
+        ls.set("e-contreras-kart", JSON.stringify(kart));
         this.setState({kart: kart});
     }
 
     selectProduct(product){
         this.setState({ productSelected: product });
+    }
+
+    loadKartFromLS(){
+        var kart = this.state.kart;
+        if(kart == undefined || kart.length == 0){
+            // obtener del Local Storage
+            var kartLS = ls.get("e-contreras-kart");
+            if(kartLS != null && kartLS != undefined && kartLS){
+                this.setState({ kart: JSON.parse(kartLS) });
+            }
+        }
     }
 
     getCategories(){
@@ -83,5 +104,22 @@ export default class Home extends Component {
         ];
         this.setState({categories: categorias});
     }
+
+    showLoginPage(){
+        this.setState({ showRegister: false, showLogin: true });
+    }
+
+    closeLogin(){
+        this.setState({ showRegister: false, showLogin: false });
+    }
+
+    showRegisterPage(){
+        this.setState({ showRegister: true, showLogin: false });        
+    }
+
+    closeRegister(){
+        this.setState({ showRegister: false, showLogin: false });
+    }    
+
 
 }

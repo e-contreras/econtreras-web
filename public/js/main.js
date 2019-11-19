@@ -1,5 +1,16 @@
-(function($) {
+(function ($) {
   "use strict"
+
+  $(".toggle-password").click(function () {
+
+    $(this).toggleClass("zmdi-eye zmdi-eye-off");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+      input.attr("type", "text");
+    } else {
+      input.attr("type", "password");
+    }
+  });
 
   // NAVIGATION
   var responsiveNav = $('#responsive-nav'),
@@ -8,17 +19,17 @@
     menuToggle = $('#responsive-nav .menu-nav .menu-header'),
     menuList = $('#responsive-nav .menu-nav .menu-list');
 
-  catToggle.on('click', function() {
+  catToggle.on('click', function () {
     menuList.removeClass('open');
     catList.toggleClass('open');
   });
 
-  menuToggle.on('click', function() {
+  menuToggle.on('click', function () {
     catList.removeClass('open');
     menuList.toggleClass('open');
   });
 
-  $(document).click(function(event) {
+  $(document).click(function (event) {
     if (!$(event.target).closest(responsiveNav).length) {
       if (responsiveNav.hasClass('open')) {
         responsiveNav.removeClass('open');
@@ -54,21 +65,21 @@
     arrows: false,
     appendDots: '.product-slick-dots-1',
     responsive: [{
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          dots: false,
-          arrows: true,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      },
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        dots: false,
+        arrows: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      }
+    },
     ]
   });
 
@@ -82,21 +93,21 @@
     arrows: false,
     appendDots: '.product-slick-dots-2',
     responsive: [{
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          dots: false,
-          arrows: true,
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      },
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        dots: false,
+        arrows: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      }
+    },
     ]
   });
 
@@ -130,10 +141,10 @@
       connect: true,
       tooltips: [true, true],
       format: {
-        to: function(value) {
+        to: function (value) {
           return value.toFixed(2) + '$';
         },
-        from: function(value) {
+        from: function (value) {
           return value
         }
       },

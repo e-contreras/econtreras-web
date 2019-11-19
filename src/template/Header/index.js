@@ -71,7 +71,7 @@ export default class Header extends Component {
                                                 Mi cuenta <i className="fa fa-caret-down" />
                                             </strong>
                                         </div>
-                                        <a href="#" className="text-uppercase">Login</a>{" "}/{" "}
+                                        <a href="#" className="text-uppercase" onClick={this.props.showLogin} >Login</a>{" "}/{" "}
                                         <a href="#" className="text-uppercase">Join</a>
                                         <ul className="custom-menu">
                                             <li>
@@ -90,7 +90,7 @@ export default class Header extends Component {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="#" onClick={this.props.showLogin}>
                                                     <i className="fa fa-unlock-alt" /> Login
                                                 </a>
                                             </li>
