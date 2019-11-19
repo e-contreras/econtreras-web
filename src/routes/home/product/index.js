@@ -38,7 +38,7 @@ export default class Product extends Component {
                             <li>
                                 <a href="#" onClick={this.goToProducts.bind(this)} >Productos</a>
                             </li>
-                            <li className="active">{product.name}</li>
+                            <li className="active">{product.product_name}</li>
                         </ul>
                     </div>
                 </div>
@@ -49,13 +49,13 @@ export default class Product extends Component {
                                 <div className="col-md-6">
                                     <div id="product-main-view">
                                         <div className="product-view">
-                                            <img src={product.mainImage} alt />
+                                            <img src={"data:image/jpeg;base64," + product.images[0]} alt={product.product_name} />
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="product-body">
-                                        <h2 className="product-name">{product.name}</h2>
+                                        <h2 className="product-name">{product.product_name}</h2>
                                         <h3 className="product-price">{this.showPrice(product)}</h3>
                                         <div>
                                             <div className="product-rating">
@@ -108,7 +108,7 @@ export default class Product extends Component {
                                         </ul>
                                         <div className="tab-content">
                                             <div id="tab1" className="tab-pane fade in active">
-                                                <p>{product.description}</p>
+                                                <p>{product.descripcion}</p>
                                             </div>
                                             <div id="tab2" className="tab-pane fade in">
                                                 {product.details}
@@ -132,22 +132,21 @@ export default class Product extends Component {
     
     handleAddToKart(product){
         var kartItem = {
+            available: product.available,
+            description: product.description,
             id: product.id,
-            name: product.name,
-            currency: product.currency,
-            price: product.price,
-            haveDiscount: product.haveDiscount,
-            discount: product.discount,
-            quantity: this.state.quantity,
-            stock: product.stock,
-            image: product.image
+            images: product.images,
+            product_name: product.product_name,
+            purchase_prices: product.purchase_prices,
+            sale_prices: product.sale_prices,
+            quantity: this.state.quantity
         }
         this.props.addToKart(kartItem);
     }    
 
     showPrice(product) {
-        var currency = product.currency.symbol;
-        return currency + " " + new Intl.NumberFormat("de-DE").format(product.price);
+        var currency = "GS";
+        return currency + " " + new Intl.NumberFormat("de-DE").format(product.sale_prices);
     }
 
     goToProducts(){

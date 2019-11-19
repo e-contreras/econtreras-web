@@ -72,7 +72,7 @@ export default class Header extends Component {
                                             </strong>
                                         </div>
                                         <a href="#" className="text-uppercase" onClick={this.props.showLogin} >Login</a>{" "}/{" "}
-                                        <a href="#" className="text-uppercase">Join</a>
+                                        <a href="#" className="text-uppercase" onClick={this.props.showRegister}>Join</a>
                                         <ul className="custom-menu">
                                             <li>
                                                 <a href="#">
@@ -95,7 +95,7 @@ export default class Header extends Component {
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="#">
+                                                <a href="#" onClick={this.props.showRegister}>
                                                     <i className="fa fa-user-plus" /> Crear una cuenta
                                                 </a>
                                             </li>
@@ -137,8 +137,8 @@ export default class Header extends Component {
         var sum = 0;
         var currency = "GS";
         for(var i = 0; i < kart.length; i++){
-            currency = kart[i].currency.symbol;
-            sum = parseInt( (kart[i].price * kart[i].quantity) + sum);
+            currency = "GS";
+            sum = parseInt( (kart[i].sale_prices * kart[i].quantity) + sum);
         }
         return currency + " " + new Intl.NumberFormat("de-DE").format(sum);
     }

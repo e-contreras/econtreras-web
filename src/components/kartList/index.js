@@ -15,14 +15,14 @@ export default class KartList extends Component {
             productsShow = productsInKart.map((i)=>(
                 <div className="product product-widget">
                     <div className="product-thumb">
-                        <img src={i.image} alt />
+                        <img src={"data:image/jpeg;base64," + i.images[0]} alt />
                     </div>
                     <div className="product-body">
                         <h3 className="product-price">
                             {this.showPrice(i)} <span className="qty">x{i.quantity}</span>
                         </h3>
                         <h2 className="product-name">
-                            <a href="#">{i.name}</a>
+                            <a href="#">{i.product_name}</a>
                         </h2>
                     </div>
                     <button className="cancel-btn" onClick={(e)=>{this.props.removeFromKart(i)}}>
@@ -48,8 +48,8 @@ export default class KartList extends Component {
     }
 
     showPrice(product){
-        var currency = product.currency.symbol;
-        return currency + " " + new Intl.NumberFormat("de-DE").format(product.price);
+        var currency = "GS";
+        return currency + " " + new Intl.NumberFormat("de-DE").format(product.sale_prices);
     }    
 
     showFullKartView(){
@@ -59,5 +59,6 @@ export default class KartList extends Component {
     showPayment(){
         this.props.history.push("/payment");
     }
+
 
 }

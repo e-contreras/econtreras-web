@@ -28,12 +28,12 @@ export default class ProductCard extends Component {
                 <div className="product product-single">
                     <div className="product-thumb">
                         <button className="main-btn quick-view" onClick={(e)=>{this.getDetail(product)}}><i className="fa fa-search-plus" />VER</button>
-                        <img src={product.image} alt={product.name} />
+                        <img src={"data:image/jpeg;base64," + product.images[0]} alt={product.product_name} />
                     </div>
                     <div className="product-body">
                         {calification}                    
                         <h3 className="product-Precio">{this.showPrice(product)}</h3>
-                        <h2 className="product-name"><a href="#">{product.name}</a></h2>
+                        <h2 className="product-name"><a href="#">{product.product_name}</a></h2>
                         <div className="product-btns">
                             <button className="main-btn icon-btn"><i className="fa fa-heart" /></button>
                             <button className="main-btn icon-btn"><i className="fa fa-exchange" /></button>
@@ -46,21 +46,20 @@ export default class ProductCard extends Component {
     }
 
     showPrice(product) {
-        var currency = product.currency.symbol;
-        return currency + " " + new Intl.NumberFormat("de-DE").format(product.price);
+        var currency = "GS"
+        return currency + " " + new Intl.NumberFormat("de-DE").format(product.sale_prices);
     }
 
     handleAddToKart(product){
         var kartItem = {
+            available: product.available,
+            description: product.description,
             id: product.id,
-            name: product.name,
-            currency: product.currency,
-            price: product.price,
-            haveDiscount: product.haveDiscount,
-            discount: product.discount,
-            quantity: 1,
-            stock: product.stock,
-            image: product.image
+            images: product.images,
+            product_name: product.product_name,
+            purchase_prices: product.purchase_prices,
+            sale_prices: product.sale_prices,
+            quantity: 1
         }
         this.props.addToKart(kartItem);
     }

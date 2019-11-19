@@ -14,9 +14,11 @@ export default class Order extends Component {
             havingElements = true;
             order = productsInKart.map((i) => (
                 <tr>
-                    <td className="thumb"><img src={i.image} alt={i.name} /></td>
+                    <td className="thumb">
+                        <img src={"data:image/jpeg;base64," + i.images[0]} alt={i.product_name} />
+                    </td>
                     <td className="details">
-                        <a href="#">{i.name}</a>
+                        <a href="#">{i.product_name}</a>
                         <ul>
                             <li><span>Size: XL</span></li>
                             <li><span>Color: Camelot</span></li>
@@ -88,8 +90,8 @@ export default class Order extends Component {
         var sum = 0;
         var currency = "GS";
         for(var i = 0; i < kart.length; i++){
-            currency = kart[i].currency.symbol;
-            sum = parseInt( (kart[i].price * kart[i].quantity) + sum);
+            currency = "GS";
+            sum = parseInt( (kart[i].sale_prices * kart[i].quantity) + sum);
         }
         return currency + " " + new Intl.NumberFormat("de-DE").format(sum);
     }
@@ -99,21 +101,21 @@ export default class Order extends Component {
         var shipping = 0;
         var currency = "GS";
         for(var i = 0; i < kart.length; i++){
-            currency = kart[i].currency.symbol;
-            sum = parseInt( (kart[i].price * kart[i].quantity) + sum);
+            currency = "GS";
+            sum = parseInt( (kart[i].sale_prices * kart[i].quantity) + sum);
         }
         sum = parseInt(sum + shipping);
         return currency + " " + new Intl.NumberFormat("de-DE").format(sum);        
     }    
 
     showPrice(product) {
-        var currency = product.currency.symbol;
-        return currency + " " + new Intl.NumberFormat("de-DE").format(product.price);
+        var currency = "GS";
+        return currency + " " + new Intl.NumberFormat("de-DE").format(product.sale_prices);
     }
 
     showSum(product){
-        var currency = product.currency.symbol;
-        return currency + " " + new Intl.NumberFormat("de-DE").format(product.price * product.quantity);        
+        var currency = "GS";
+        return currency + " " + new Intl.NumberFormat("de-DE").format(product.sale_prices * product.quantity);        
     }
 
     showFullKartView() {

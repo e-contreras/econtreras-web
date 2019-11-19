@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ProductCard from "../../../components/productCard";
+import axios from "axios";
 
 export default class Products extends Component {
 
@@ -11,7 +12,7 @@ export default class Products extends Component {
     }
 
     componentWillMount() {
-        this.mockProducts();
+        this.getProducts();
     }
 
     render() {
@@ -105,76 +106,18 @@ export default class Products extends Component {
         );
     }
 
-    mockProducts() {
-        
-        var products = [
-            {
-                id: 1,
-                name: "Cartera modelo 9201 Chenson",
-                price: 150000,
-                currency: {
-                    type: "PY",
-                    symbol: "GS"
-                },
-                image: "./img/product01.jpg",
-                stock: 10,
-                new: true,
-                haveDiscount: true,
-                discount: -20,
-                calification: 5,
-                mainImage: "./img/main-product01.jpg",
-                brand: "Chenson",
-                description: "Cartera ampliamente cómoda",
-                details: "20x20cm diseño xforce"
-            },
-            {
-                id: 2,
-                name: "Billetera Kavara",
-                price: 100000,
-                currency: {
-                    type: "PY",
-                    symbol: "GS"
-                },
-                image: "./img/product03.jpg",
-                stock: 15,
-                new: true,
-                haveDiscount: true,
-                discount: -20,
-                calification: 5,
-                mainImage: "./img/main-product03.jpg",
-                brand: "Kavara",
-                description: "Cartera ampliamente cómoda",
-                details: "20x20cm diseño xforce"                
-            },
-            {
-                id: 3,
-                name: "Reloj Q&Q 2991 xtreme",
-                price: 133000,
-                currency: {
-                    type: "PY",
-                    symbol: "GS"
-                },
-                image: "./img/product02.jpg",
-                stock: 15,
-                new: false,
-                haveDiscount: false,
-                discount: undefined,
-                calification: 5,
-                mainImage: "./img/main-product02.jpg",
-                brand: "Q&Q",
-                description: "Cartera ampliamente cómoda",
-                details: "20x20cm diseño xforce"                
-            }
-        ];
-        this.setState({ products: products });
+    getProducts(){
+        axios.get("http://localhost:8080/products/store")
+        .then(res => {
+            console.log(res.data);
+            this.setState({ products: res.data });
+        })
+        .catch(error => {
+            console.error(error);
+        })
     }
 
-    goToProducts(){
-        this.props.history.push("/products");
-    }
-
-    goToHome(){
-        this.props.history.push("/");
-    }    
+    goToProducts(){ this.props.history.push("/products"); }
+    goToHome(){ this.props.history.push("/"); }    
 
 }

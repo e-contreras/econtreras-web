@@ -27,13 +27,12 @@ export default class Home extends Component {
     }
 
     render() {
-        
         return (
             <div>
                 <Login show={this.state.showLogin} close={this.closeLogin.bind(this)} showRegister={this.showRegisterPage.bind(this)}/>
                 <Register show={this.state.showRegister} showLogin={this.showLoginPage.bind(this)} close={this.closeRegister.bind(this)}/>
-                <Header showLogin={this.showLoginPage.bind(this)} categories={this.state.categories} kart={this.state.kart} history={this.props.history} removeFromKart={this.removeFromKart.bind(this)}/>
-                <NavMenu history={this.props.history}/>
+                <Header showLogin={this.showLoginPage.bind(this)} showRegister={this.showRegisterPage.bind(this)} categories={this.state.categories} kart={this.state.kart} history={this.props.history} removeFromKart={this.removeFromKart.bind(this)}/>
+                <NavMenu history={this.props.history} location={this.props.location}/>
                 <Content
                     kart={this.state.kart} addToKart={this.addToKart.bind(this)}
                     removeFromKart={this.removeFromKart.bind(this)}
@@ -51,6 +50,7 @@ export default class Home extends Component {
             for(var i = 0; i < kart.length; i++){
                 if(product.id == kart[i].id){
                     kart[i].quantity = product.quantity;
+                    ls.set("e-contreras-kart", JSON.stringify(kart));                    
                     this.setState({ kart: kart });
                     return;
                 }
@@ -105,21 +105,9 @@ export default class Home extends Component {
         this.setState({categories: categorias});
     }
 
-    showLoginPage(){
-        this.setState({ showRegister: false, showLogin: true });
-    }
-
-    closeLogin(){
-        this.setState({ showRegister: false, showLogin: false });
-    }
-
-    showRegisterPage(){
-        this.setState({ showRegister: true, showLogin: false });        
-    }
-
-    closeRegister(){
-        this.setState({ showRegister: false, showLogin: false });
-    }    
-
+    showLoginPage(){ this.setState({ showRegister: false, showLogin: true }); }
+    closeLogin(){ this.setState({ showRegister: false, showLogin: false }); }
+    showRegisterPage(){ this.setState({ showRegister: true, showLogin: false }); }
+    closeRegister(){ this.setState({ showRegister: false, showLogin: false }); }
 
 }
