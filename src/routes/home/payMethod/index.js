@@ -167,8 +167,7 @@ export default class PayMethod extends Component {
         cart = this.convert(cart);
         var obj = {
             cartProductBeanList: cart,
-            status: "CONFIRMADO",
-            solicitudeId: Math.floor(Math.random() * 10000000)
+            status: "CONFIRMADO"
         };
         console.log(obj);
         axios.post("http://localhost:8080/carts", obj)

@@ -7,6 +7,7 @@ import Login from "./login";
 import Register from "./register";
 import ls from "local-storage";
 import axios from "axios";
+import Notifications, {notify} from "react-notify-toast";
 
 export default class Home extends Component {
 
@@ -18,11 +19,13 @@ export default class Home extends Component {
             searchField: undefined,
             productSelected: undefined,
             showLogin: false,
-            showRegister: false
+            showRegister: false,
+            user: undefined
         }
     }
 
     componentWillMount(){
+        this.loadUserFromLS();
         this.loadCartFromLS();
         this.getCategories();
     }
@@ -30,13 +33,14 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <Login show={this.state.showLogin} close={this.closeLogin.bind(this)} showRegister={this.showRegisterPage.bind(this)}/>
-                <Register show={this.state.showRegister} showLogin={this.showLoginPage.bind(this)} close={this.closeRegister.bind(this)}/>
-                <Header showLogin={this.showLoginPage.bind(this)} showRegister={this.showRegisterPage.bind(this)} categories={this.state.categories} cart={this.state.cart} history={this.props.history} removeFromCart={this.removeFromCart.bind(this)}/>
-                <NavMenu history={this.props.history} location={this.props.location}/>
+                <Notifications/>
+                <Login show={this.state.showLogin} close={this.closeLogin.bind(this)} showRegister={this.showRegisterPage.bind(this)} login={this.login.bind(this)}/>
+                <Register notify={notify} show={this.state.showRegister} showLogin={this.showLoginPage.bind(this)} close={this.closeRegister.bind(this)}/>
+                <Header user={this.state.user} showLogin={this.showLoginPage.bind(this)} showRegister={this.showRegisterPage.bind(this)} categories={this.state.categories} cart={this.state.cart} history={this.props.history} removeFromCart={this.removeFromCart.bind(this)} logout={this.logout.bind(this)}/>
+                <NavMenu user={this.state.user} history={this.props.history} location={this.props.location}/>
                 <Content
                     cart={this.state.cart} addToCart={this.addToCart.bind(this)}
-                    removeFromCart={this.removeFromCart.bind(this)}
+                    removeFromCart={this.removeFromCart.bind(this)} user={this.state.user}
                     product={this.state.productSelected} selectProduct={this.selectProduct.bind(this)}
                 />
                 <Footer />
@@ -82,6 +86,26 @@ export default class Home extends Component {
                 this.setState({ cart: JSON.parse(cartLS) });
             }
         }
+    }
+
+    loadUserFromLS(){
+        var user = this.state.user;
+        if(user == undefined || user == null){
+            var userLS = ls.get("e-contreras-user");
+            if(userLS != null && userLS != undefined && userLS){
+                this.setState({ user: userLS });
+            }
+        }
+    }
+
+    login(user){
+        ls.set("e-contreras-user", user);
+        this.setState({ user: user });
+    }
+
+    logout(){
+        ls.remove("e-contreras-user");
+        this.setState({ user: undefined });
     }
 
     getCategories(){

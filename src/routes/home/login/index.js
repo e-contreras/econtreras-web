@@ -1,6 +1,16 @@
 import React, { Component } from "react";
+import axios from "axios";
+import ls from "local-storage";
 
 export default class Login extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            username: undefined,
+            password: undefined
+        }
+    }
 
     render() {
         return (
@@ -11,19 +21,17 @@ export default class Login extends Component {
                             Iniciar sesión
                         </span>
                         <div className="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                            <input className="input100" type="text" name="email" placeholder="Email / Nombre de usuario" />
+                            <input className="input100" type="text" value={this.state.username} onChange={(e)=>{this.changeField(e, "username")}} name="text" placeholder="Nombre de usuario" />
                             <span className="focus-input100-1" />
                             <span className="focus-input100-2" />
                         </div>
                         <div className="wrap-input100 rs1 validate-input" data-validate="Password is required">
-                            <input className="input100" type="password" name="pass" placeholder="Contraseña" />
+                            <input className="input100" type="password" value={this.state.password} onChange={(e)=>{this.changeField(e, "password")}} name="pass" placeholder="Contraseña" />
                             <span className="focus-input100-1" />
                             <span className="focus-input100-2" />
                         </div>
                         <div className="container-login100-form-btn m-t-20">
-                            <button className="login100-form-btn">
-                                Ingresar
-                                </button>
+                            <button className="login100-form-btn" onClick={this.handleLogin.bind(this)}>Ingresar</button>
                         </div>
                         <div className="container-login100-form-btn m-t-5">
                             <button className="login100-form-btn" style={{background: "silver"}} onClick={(e)=>{this.props.close()}}>Cancelar</button>
@@ -36,8 +44,31 @@ export default class Login extends Component {
                     </div>
                 </div>
             </div>
-
         );
+    }
+
+    changeField(e, field) {
+        var obj = {};
+        obj[field] = e.target.value;
+        this.setState(obj);
+    }
+
+    handleLogin(e){
+        e.preventDefault();        
+        var obj = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        console.log(obj);
+        axios.post("http://localhost:8080/authentication/login", obj)
+        .then(res => {
+            this.props.login(res.data);
+            this.props.close();
+        })
+        .catch(error => {
+            console.error(error);
+            this.props.close();
+        })
     }
 
 }

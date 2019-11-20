@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CartList from "../../components/cartList";
+import ls from "local-storage";
 
 export default class Header extends Component {
 
@@ -8,6 +9,9 @@ export default class Header extends Component {
     }
 
     render() {
+
+        var user = this.props.user;
+        var logged = (user != undefined && user != null && user);
 
         var categories = this.props.categories;
         var categoriesShow = <option key="-1" value="-1">No hay categorías</option>;
@@ -23,7 +27,9 @@ export default class Header extends Component {
                     <div id="top-header">
                         <div className="container">
                             <div className="pull-left">
-                                <span><strong>Bienvenido a E-Contreras!</strong></span>
+                                <span>                                    
+                                    <strong>Bienvenido a E-Contreras!</strong>
+                                </span>
                             </div>
                             <div className="pull-right">
                                 <ul className="header-top-links">
@@ -33,6 +39,11 @@ export default class Header extends Component {
                                     </li>
                                     <li>
                                         <a href="#"><strong>FAQ</strong></a>
+                                    </li>
+                                    <li hidden={!logged}>
+                                        <a href="#">
+                                            <strong style={{color: "#F8694A"}}>{logged ? (user.name + " " + user.lastName) : ""}</strong>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -71,8 +82,13 @@ export default class Header extends Component {
                                                 Mi cuenta <i className="fa fa-caret-down" />
                                             </strong>
                                         </div>
-                                        <a href="#" className="text-uppercase" onClick={this.props.showLogin} >Login</a>{" "}/{" "}
-                                        <a href="#" className="text-uppercase" onClick={this.props.showRegister}>Join</a>
+                                        <section hidden={logged}>
+                                            <a href="#" className="text-uppercase" onClick={this.props.showLogin} >Login</a>{" "}/{" "}
+                                            <a href="#" className="text-uppercase" onClick={this.props.showRegister}>Join</a>
+                                        </section>
+                                        <section hidden={!logged}>
+                                            <a href="#" className="text-uppercase" onClick={this.props.logout}>SALIR</a>                                            
+                                        </section>
                                         <ul className="custom-menu">
                                             <li>
                                                 <a href="#">
@@ -86,19 +102,22 @@ export default class Header extends Component {
                                             </li>
                                             <li>
                                                 <a href="#">
-                                                    <i className="fa fa-check" /> Checkout
+                                                    <i className="fa fa-check" /> Comprar
                                                 </a>
                                             </li>
-                                            <li>
+                                            <li hidden={logged}>
                                                 <a href="#" onClick={this.props.showLogin}>
                                                     <i className="fa fa-unlock-alt" /> Login
                                                 </a>
-                                            </li>
-                                            <li>
+                                            </li>                                            
+                                            <li hidden={logged}>
                                                 <a href="#" onClick={this.props.showRegister}>
                                                     <i className="fa fa-user-plus" /> Crear una cuenta
                                                 </a>
                                             </li>
+                                            <li hidden={!logged}>
+                                                <a href="#" onClick={this.props.logout}><i className="fa fa-sign-out" /> SALIR</a>
+                                            </li>                                            
                                         </ul>
                                     </li>
                                     <li className="header-cart dropdown default-dropdown">
