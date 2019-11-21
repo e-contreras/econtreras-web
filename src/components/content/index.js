@@ -27,7 +27,7 @@ export default class Content extends Component {
                     <Route exact path={`/payment`} render={routeProps => <Payment {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart}/>} />
                     <Route exact path={`/purchases`} render={routeProps => <Purchases {...routeProps} cart={this.props.cart}/>} />
                     <Route exact path={`/cards`} render={routeProps => <Cards {...routeProps} user={this.props.user}/>} />
-                    <Route exact path={`/paymethod`} render={routeProps => <PayMethod {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart}/>} />
+                    <Route exact path={`/paymethod`} render={routeProps => <PayMethod {...routeProps} user={this.props.user} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart}/>} />
                     <Route exact path={`/cart`} render={routeProps => <Cart {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart} />} />
                     <Route exact path={`/products`} render={routeProps => <Products {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart} selectProduct={this.props.selectProduct} searchField={this.props.searchField} categorySelected={this.props.categorySelected}/> }/>
                     <Route exact path={`/product`} render={routeProps => <Product {...routeProps} cart={this.props.cart} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart} product={this.props.product} /> } />
