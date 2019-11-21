@@ -67,22 +67,9 @@ export default class Product extends Component {
                                             </div>
                                         </div>
                                         <p><strong>Disponiblidad:</strong> En Stock</p>
-                                        <p><strong>Marca:</strong>{product.brand}</p>
-                                        <p></p>
+                                        <p><strong>Marca:</strong> {product.brand}</p>
+                                        <div dangerouslySetInnerHTML={{__html: product.description}}></div>
                                         <div className="product-options">
-                                            <ul className="size-option">
-                                                <li><span className="text-uppercase">Tamaño:</span></li>
-                                                <li className="active"><a href="#">S</a></li>
-                                                <li><a href="#">XL</a></li>
-                                                <li><a href="#">SL</a></li>
-                                            </ul>
-                                            <ul className="color-option">
-                                                <li><span className="text-uppercase">Color:</span></li>
-                                                <li className="active"><a href="#" style={{ backgroundColor: '#475984' }} /></li>
-                                                <li><a href="#" style={{ backgroundColor: '#8A2454' }} /></li>
-                                                <li><a href="#" style={{ backgroundColor: '#BF6989' }} /></li>
-                                                <li><a href="#" style={{ backgroundColor: '#9A54D8' }} /></li>
-                                            </ul>
                                         </div>
                                         <div className="product-btns">
                                             <div className="qty-input">
@@ -96,22 +83,6 @@ export default class Product extends Component {
                                                 <button className="main-btn icon-btn"><i className="fa fa-heart" /></button>
                                                 <button className="main-btn icon-btn"><i className="fa fa-exchange" /></button>
                                                 <button className="main-btn icon-btn"><i className="fa fa-share-alt" /></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-md-12">
-                                    <div className="product-tab">
-                                        <ul className="tab-nav">
-                                            <li className="active"><a data-toggle="tab" href="#tab1">Descripción</a></li>
-                                            <li><a data-toggle="tab" href="#tab2">Detalles</a></li>
-                                        </ul>
-                                        <div className="tab-content">
-                                            <div id="tab1" className="tab-pane fade in active">
-                                                <p>{product.descripcion}</p>
-                                            </div>
-                                            <div id="tab2" className="tab-pane fade in">
-                                                {product.details}
                                             </div>
                                         </div>
                                     </div>

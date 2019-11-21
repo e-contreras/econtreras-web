@@ -60,8 +60,8 @@ export default class Header extends Component {
                                 </div>
                                 <div className="header-search">
                                     <form>
-                                        <input className="input search-input" type="text" placeholder="Estoy buscando..." />
-                                        <select className="input search-categories">
+                                        <input className="input search-input" type="text" placeholder="Estoy buscando..." onChange={this.props.changeSearchField} />
+                                        <select className="input search-categories" onChange={this.props.changeCategory}>
                                             <option value={0}>Todas las categorías</option>
                                             {categoriesShow}
                                         </select>
@@ -120,7 +120,7 @@ export default class Header extends Component {
                                             </li>                                            
                                         </ul>
                                     </li>
-                                    <li className="header-cart dropdown default-dropdown">
+                                    <li className="header-cart dropdown default-dropdown" style={{width: "200px"}}>
                                         <a className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                             <div className="header-btns-icon">
                                                 <i className="fa fa-shopping-cart" />

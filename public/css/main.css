@@ -150,6 +150,16 @@ iframe {
   background: #e9faff;
 }
 
+.container-card100 {
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #e9faff;
+}
+
 .wrap-login100 {
   width: 500px;
   background: #fff;

@@ -7,8 +7,13 @@ export default class Products extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            products: []
+            products: [],
+            loading: false
         }
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.getProducts();
     }
 
     componentWillMount() {
@@ -16,9 +21,6 @@ export default class Products extends Component {
     }
 
     render() {
-
-        console.log(this.props);
-
         var products = this.state.products;
         var productsShow = <></>;
         var havingProducts = false;
@@ -46,56 +48,30 @@ export default class Products extends Component {
                         <div className="row">
                             <div id="main" className="col-md-12">
                                 <div className="store-filter clearfix">
-                                    <div className="pull-left">
+                                    <div className="pull-right">
                                         <div className="row-filter">
                                             <a href="#"><i className="fa fa-th-large" /></a>
                                             <a href="#" className="active"><i className="fa fa-bars" /></a>
                                         </div>
-                                    </div>
-                                    <div className="pull-right">
-                                        <div className="page-filter">
-                                            <select className="input">
-                                                <option value={0}>10</option>
-                                                <option value={1}>20</option>
-                                                <option value={2}>30</option>
-                                            </select>
-                                        </div>
-                                        <ul className="store-pages">
-                                            <li><span className="text-uppercase">Página:</span></li>
-                                            <li className="active">1</li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#"><i className="fa fa-caret-right" /></a></li>
-                                        </ul>
                                     </div>
                                 </div>
                                 <div id="store">
-                                    <div className="row">
+                                    <div className="row" hidden={!havingProducts}>
                                         {productsShow}
+                                    </div>
+                                    <div className="row" hidden={ !(!havingProducts && !this.state.loading) }>
+                                        <h3>No hay resultados ... </h3>
+                                    </div>
+                                    <div className="row" hidden={!this.state.loading}>
+                                        <img width="400" height="400" src="./img/loading.gif" />
                                     </div>
                                 </div>
                                 <div className="store-filter clearfix">
-                                    <div className="pull-left">
+                                    <div className="pull-right">
                                         <div className="row-filter">
                                             <a href="#"><i className="fa fa-th-large" /></a>
                                             <a href="#" className="active"><i className="fa fa-bars" /></a>
                                         </div>
-                                    </div>
-                                    <div className="pull-right">
-                                        <div className="page-filter">
-                                            <select className="input">
-                                                <option value={0}>10</option>
-                                                <option value={1}>20</option>
-                                                <option value={2}>30</option>
-                                            </select>
-                                        </div>
-                                        <ul className="store-pages">
-                                            <li><span className="text-uppercase">PÁGINA:</span></li>
-                                            <li className="active">1</li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#"><i className="fa fa-caret-right" /></a></li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -107,14 +83,30 @@ export default class Products extends Component {
     }
 
     getProducts(){
+        this.setState({loading: true});
         axios.get("http://localhost:8080/products/store")
         .then(res => {
-            console.log(res.data);
-            this.setState({ products: res.data });
+            var productos = this.filter(res.data);
+            this.setState({ products: productos, loading: false });
         })
         .catch(error => {
             console.error(error);
+            this.setState({ loading: false });
         })
+    }
+
+    filter(products){
+        var category = this.props.categorySelected;
+        var searchField = this.props.searchField;
+        console.log(products, category, searchField);
+        if(category != undefined && category != 0 && category != -1) {
+            products = products.filter(item => item.category_id == category);
+        }
+        if(searchField != undefined && searchField.trim().length > 0) {
+            products = products.filter(item => item.product_name.search(searchField) != -1);
+        }
+        console.log(products);
+        return products;
     }
 
     goToProducts(){ this.props.history.push("/products"); }
