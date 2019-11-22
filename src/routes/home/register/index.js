@@ -143,7 +143,6 @@ export default class Register extends Component {
     getDocumentTypes() {
         axios.get("http://localhost:8080/document_types")
             .then(res => {
-                console.log(res.data);
                 this.setState({
                     documentTypes: res.data
                 });
@@ -172,17 +171,13 @@ export default class Register extends Component {
 
         axios.post("http://localhost:8080/authentication/register", obj)
         .then(res => {
-            console.log(res.data);
             this.props.notify.show("Se ha registrado exitosamente", "success");
             this.props.close();
         })
         .catch(error => {
-            console.log(error);
             this.props.notify.show("Ha ocurrido un error en el registro", "error");
             this.props.close();
         })
-
-        console.log(obj);
 
     }
 

@@ -6,7 +6,6 @@ export default class NavMenu extends Component {
         var current = this.props.location.pathname;
         var user = this.props.user;
         var havingSession = (user != null && user != undefined && user);
-        console.log(user, havingSession)
         return (
             <div>
                 <div id="navigation">

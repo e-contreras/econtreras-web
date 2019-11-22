@@ -106,7 +106,6 @@ export default class Cards extends Component {
             this.setState({ loading: true });
             axios.get("http://localhost:8080/card/" + user.id)
                 .then(res => {
-                    console.log(res.data);
                     if(res.data.length > 0){
                         this.setState({ cards: res.data, cardSelected: res.data[0], loading: false });
                     }
@@ -115,7 +114,6 @@ export default class Cards extends Component {
                     }
                 })
                 .catch(error => {
-                    console.error(error);
                     this.setState({ cards: [], cardSelected: undefined, loading: false });
                 })
         }
@@ -139,7 +137,6 @@ export default class Cards extends Component {
             this.setState({ showRegister: false }, this.getCardsByClient);
         })
         .catch(error => {
-            console.log(error);
             notify.show("Ha ocurrido un error al registrar el medio de pago", "error");
             this.setState({ showRegister: false });
         })
@@ -148,12 +145,10 @@ export default class Cards extends Component {
     deleteCard(id){
         axios.delete("http://localhost:8080/card/" + id)
         .then(res => {
-            notify.show("Tarjeta eliminada exitosamente", "sucess");
-            console.log(res);
+            notify.show("Tarjeta eliminada exitosamente", "success");
             this.getCardsByClient();
         })
         .catch(error => {
-            console.log(error);
             notify.show("Ha ocurrido un error al eliminar la tarjeta", "error");
         })
     }

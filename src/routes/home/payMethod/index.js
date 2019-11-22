@@ -174,11 +174,17 @@ export default class PayMethod extends Component {
     confirmPurchase() {
         var cart = this.props.cart;
         cart = this.convert(cart);
+        var user = this.props.user;
+        if(user == null || user == undefined || !user){
+            notify.show("Debes iniciar sesión para realizar una compra", "warning");
+            this.props.history.push("/");
+            return;
+        }
         var obj = {
+            client: user.id,
             cartProductBeanList: cart,
             status: "CONFIRMADO"
         };
-        console.log(obj);
         axios.post("http://localhost:8080/carts", obj)
             .then(res => {
                 notify.show("Se ha realizado el pedido correctamente", "success");
@@ -195,7 +201,6 @@ export default class PayMethod extends Component {
             this.setState({ loading: true });
             axios.get("http://localhost:8080/card/" + user.id)
                 .then(res => {
-                    console.log(res.data);
                     if(res.data.length > 0){
                         this.setState({ cards: res.data, cardSelected: res.data[0], loading: false });
                     }

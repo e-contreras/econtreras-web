@@ -59,7 +59,6 @@ export default class Login extends Component {
             username: this.state.username,
             password: this.state.password
         }
-        console.log(obj);
         axios.post("http://localhost:8080/authentication/login", obj)
         .then(res => {
             this.props.notify.show("Bienvenido " + res.data.name + " " + res.data.lastName, "success");
@@ -67,7 +66,6 @@ export default class Login extends Component {
             this.props.close();
         })
         .catch(error => {
-            console.log(console.log(error.response.data.message));
             this.props.notify.show(error.response.data.message, "error");
             this.props.close();
         })

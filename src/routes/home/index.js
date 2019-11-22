@@ -130,7 +130,6 @@ export default class Home extends Component {
     getCategories(){
         axios.get("http://localhost:8080/categories")
         .then(res => {
-            console.log(res);
             this.setState({ categories: res.data });
         })
         .catch(error => {

@@ -98,14 +98,12 @@ export default class Products extends Component {
     filter(products){
         var category = this.props.categorySelected;
         var searchField = this.props.searchField;
-        console.log(products, category, searchField);
         if(category != undefined && category != 0 && category != -1) {
             products = products.filter(item => item.category_id == category);
         }
         if(searchField != undefined && searchField.trim().length > 0) {
             products = products.filter(item => item.product_name.search(searchField) != -1);
         }
-        console.log(products);
         return products;
     }
 

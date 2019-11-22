@@ -7,10 +7,12 @@ export default class Purchase extends Component {
     }
 
     render() {
-        var productsInCart = this.props.cart;
+        var purchase = this.props.purchase;
+        console.log(purchase);        
         var order = <></>;
-        if (productsInCart != undefined && productsInCart.length > 0) {
-            order = productsInCart.map((i) => (
+        var products = purchase.productBeanList;
+        if (products != undefined && products.length > 0) {
+            order = products.map((i) => (
                 <tr>
                     <td className="thumb">
                         <img src={"data:image/jpeg;base64," + i.images[0]} alt={i.product_name} />
@@ -57,7 +59,7 @@ export default class Purchase extends Component {
                         <tr>
                             <th className="empty" colSpan={3} />
                             <th>TOTAL</th>
-                            <th colSpan={2} className="total">{this.sumTotal(productsInCart)}</th>
+                            <th colSpan={2} className="total">{this.sumTotal(products)}</th>
                         </tr>
                     </tfoot>
                 </table>

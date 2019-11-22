@@ -24,7 +24,7 @@ export default class Card extends Component {
                             <p><span>{card.fechaExpiracionMes}/{card.fechaExpiracionAnho}</span></p>
                             <hr />
                             <div>
-                                <a href="#">Actualizar tarjeta</a> | <a href="#" onClick={(e)=>{this.props.delete(card.id)}}>Eliminar tarjeta</a>
+                                <a href="#" onClick={(e)=>{this.props.delete(card.id)}}>Eliminar tarjeta</a>
                             </div>
                         </div>
                     </div>

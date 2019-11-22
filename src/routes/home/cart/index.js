@@ -108,7 +108,6 @@ export default class Cart extends Component {
     }
 
     showPayment() {
-        console.log(this.props);
         this.props.history.push("/payment");
     }
 

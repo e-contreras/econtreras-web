@@ -4,7 +4,6 @@ import Order from "../../../components/order";
 export default class Payment extends Component {
 
     render() {
-        console.log(this.props);
         return (
             <div>
                 <div id="breadcrumb">
