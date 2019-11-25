@@ -15,7 +15,7 @@ export default class Purchase extends Component {
             order = products.map((i) => (
                 <tr>
                     <td className="thumb">
-                        <img src={"data:image/jpeg;base64," + i.images[0]} alt={i.product_name} />
+                        <img src={atob(i.images[0])} alt={i.product_name} />
                     </td>
                     <td className="details">
                         <a href="#">{i.product_name}</a>

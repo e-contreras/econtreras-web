@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {decode as atob, encode as btoa} from 'base-64'
 
 export default class ProductCard extends Component {
 
@@ -23,12 +24,17 @@ export default class ProductCard extends Component {
             </div>
         );
 
+
+        var productBtoa = product.images[0] === undefined ? '' : product.images[0] ;
+        productBtoa = atob(productBtoa);
+        
         return (
             <div className="col-md-4 col-sm-6 col-xs-6">
                 <div className="product product-single">
                     <div className="product-thumb">
                         <button className="main-btn quick-view" onClick={(e)=>{this.getDetail(product)}}><i className="fa fa-search-plus" />VER</button>
-                        <img src={"data:image/jpeg;base64," + product.images[0]} alt={product.product_name} />
+                        <img src={productBtoa} alt={product.product_name} />
+                        {/* <img src={"data:image/jpeg;base64," + btoa(product.images[0])} alt={product.product_name} /> */}
                     </div>
                     <div className="product-body">
                         {calification}                    

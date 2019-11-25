@@ -15,7 +15,7 @@ export default class CartList extends Component {
             productsShow = productsInCart.map((i)=>(
                 <div className="product product-widget">
                     <div className="product-thumb">
-                        <img src={"data:image/jpeg;base64," + i.images[0]} alt />
+                        <img src={atob(i.images[0])} alt />
                     </div>
                     <div className="product-body">
                         <h3 className="product-price">

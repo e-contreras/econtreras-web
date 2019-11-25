@@ -49,7 +49,7 @@ export default class Product extends Component {
                                 <div className="col-md-6">
                                     <div id="product-main-view">
                                         <div className="product-view">
-                                            <img src={"data:image/jpeg;base64," + product.images[0]} alt={product.product_name} />
+                                            <img src={atob(product.images[0])} alt={product.product_name} />
                                         </div>
                                     </div>
                                 </div>

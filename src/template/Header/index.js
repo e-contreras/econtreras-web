@@ -33,7 +33,7 @@ export default class Header extends Component {
                             </div>
                             <div className="pull-right">
                                 <ul className="header-top-links">
-                                    <li><a href="#"><strong>Admin</strong></a></li>
+                                    <li><a href="http://localhost:8081" target="_blank"><strong>Admin</strong></a></li>
                                     <li>
                                         <a href="#"><strong>Nosotros</strong></a>
                                     </li>
